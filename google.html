@@ -4,88 +4,234 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google SDE Interview Questions (45+ DSA, System Design, HR) | InternAdda</title>
-    <meta name="description" content="Prepare for your Google SDE interview with 45+ premium, realistic questions covering advanced DSA, Large-Scale System Design (Google Maps, Search), and 'Googliness' behavioral rounds.">
+    <meta name="description" content="Prepare for your Google SDE interview with 45+ premium, realistic questions covering advanced DSA, Large-Scale System Design (Google Maps, Search), and 'Googliness' behavioral rounds. Includes full, detailed answer explanations.">
     <meta name="keywords" content="Google interview preparation, Google SDE, DSA Google, System Design Google, Googliness questions, LFU cache, Merge k sorted lists, Distributed Load Balancer, Google HR round">
+    
+    <meta property="og:title" content="Google SDE Interview Guide | 45+ Questions with Answers">
+    <meta property="og:description" content="Master coding, systems, and behavioral rounds specific to Google's engineering standards.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.internaddainterviewhub.com/google.html">
+
     <link rel="canonical" href="https://www.internaddainterviewhub.com/google.html">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">...</header>
-    <div class="floating-search-bar" id="floating-search-bar">...</div>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="InternAdda Interview Hub Logo">
+                </a>
+            </div>
+            
+            <div class="main-nav-wrapper">
+                <nav class="nav-links" id="nav-links">
+                    <a href="companies.html" class="active">Companies</a>
+                    <a href="dsa-library.html">DSA Library</a>
+                    <a href="system-design.html">System Design</a>
+                    <a href="hr-round.html">HR & Behavioral</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="utility-icons">
+                    <button id="search-trigger" title="Search Questions"><i class="fas fa-search"></i></button>
+                    <button id="theme-toggle" title="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    <div class="floating-search-bar" id="floating-search-bar">
+        <div class="container">
+            <input type="text" id="search-input-global" placeholder="Search 300+ Interview Questions (e.g. 'Two Sum' or 'Google')">
+        </div>
+    </div>
 
     <main>
-        <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); border-bottom: 4px solid #F4C430;">
-            <div class="container" style="text-align: left;">
+        <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); padding: 4rem 0;">
+            <div class="container" style="text-align: left; border-left: 4px solid #F4C430; padding-left: 15px;">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" style="width: 100px; margin-bottom: 5px;">
                 <h1>Google SDE Interview Guide</h1>
-                <p>45+ Questions: Deep-dive into Coding, Systems, and the unique <strong style="font-weight: 600;">"Googliness"</strong> culture fit.</p>
+                <p>45+ Questions: Deep-dive into Coding, Systems, and the unique <strong style="font-weight: 600;">"Googliness"</strong> culture fit. All questions include detailed answers.</p>
             </div>
         </section>
 
         <section class="question-list">
             <div class="container">
                 <div class="question-group">
-                    <h2>Coding & DSA (Core)</h2>
+                    <h2><i class="fas fa-code" style="margin-right: 10px;"></i>Coding & DSA (Focus on Advanced Data Structures)</h2>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">1. Find the shortest path from a starting node to all other nodes in a graph with non-negative weights. <span class="difficulty-tag tag-medium">Medium</span></strong>
-                        <div class="details">Topic: Graphs (Dijkstra's Algorithm). Key Requirement: Must handle large datasets efficiently.</div>
+                        <div class="question-header">
+                            <strong class="question-title">1. Design and implement a LFU (Least Frequently Used) cache.</strong>
+                            <span class="difficulty-tag tag-hard">Hard</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>LFU Cache Design:</strong> LFU evicts the item that has been used the least frequently. If there's a tie in frequency, the least recently used among them is evicted.</p>
+                                <p><strong>Data Structures Required:</strong></p>
+                                <ol>
+                                    <li><strong><code>Map&lt;Key, Node&gt;</code>:</strong> Stores key-value pairs and links to the list node.</li>
+                                    <li><strong><code>Map&lt;Frequency, DoublyLinkedList&gt;</code>:</strong> Stores lists of nodes, grouped by their access frequency.</li>
+                                    <li><strong><code>min_freq</code>:</strong> Integer tracking the minimum frequency present in the cache.</li>
+                                </ol>
+                                <p><strong>Operation:</strong> On <code>get(key)</code> or <code>put(key, value)</code>, the node's frequency increases. It must be moved from its current frequency list to the <code>frequency + 1</code> list. If the old frequency list becomes empty and it was the <code>min_freq</code>, then <code>min_freq</code> is incremented. Eviction removes the tail of the <code>min_freq</code> list.</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">2. Given a binary search tree, find the $k$-th smallest element in it. <span class="difficulty-tag tag-easy">Easy</span></strong>
-                        <div class="details">Topic: BST / Trees (Inorder Traversal). Optimization: Can be optimized using morris traversal for O(1) space.</div>
+                        <div class="question-header">
+                            <strong class="question-title">2. Given a binary search tree, find the $k$-th smallest element in it.</strong>
+                            <span class="difficulty-tag tag-medium">Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Optimal Technique:</strong> Inorder Traversal. An inorder traversal of a BST visits nodes in strictly increasing order. We can perform an iterative inorder traversal using a stack. We decrement a counter $k$ for every node visited. The moment $k$ reaches zero, we have found the element.</p>
+                                <p><strong>Complexity:</strong> Time Complexity: O(H + k), where H is the height of the tree. This is generally faster than O(N) if k is small. Follow-up: For frequent calls, augment the tree nodes with the count of nodes in their left subtree.</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">3. Implement a rate limiter to handle requests per second (e.g., 5 requests/second) for a distributed microservice. <span class="difficulty-tag tag-hard">Hard</span></strong>
-                        <div class="details">Topic: Data Structures / System Design (Sliding Window/Token Bucket). Key Concept: Distributed counter mechanism.</div>
+                        <div class="question-header">
+                            <strong class="question-title">3. Given an array of integers, return a new array where each element is the product of all elements in the original array except the one at the current index. Solve without division in O(n).</strong>
+                            <span class="difficulty-tag tag-medium">Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Technique:</strong> Prefix and Suffix Product Arrays. We need two passes:</p>
+                                <ol>
+                                    <li><strong>First Pass (Prefix):</strong> Iterate forward. At index $i$, store the product of all elements to the <strong style="font-weight: 600;">left</strong> of $i$.</li>
+                                    <li><strong>Second Pass (Suffix):</strong> Iterate backward. Maintain a running product of elements to the <strong style="font-weight: 600;">right</strong>. Multiply this running suffix product by the pre-calculated prefix product already stored.</li>
+                                </ol>
+                                <p><strong>Example:</strong> For [1, 2, 3, 4], prefix array becomes [1, 1, 2, 6]. Suffix product starts at 1, then: $6\times1=6$; $2\times4=8$; $1\times(4\times3)=12$; $1\times(4\times3\times2)=24$. Final result: [24, 12, 8, 6].</p>
+                            </div>
+                        </div>
                     </div>
+
+                </div>
+
+                <div class="question-group">
+                    <h2><i class="fas fa-cogs" style="margin-right: 10px;"></i>System Design (G-Scale)</h2>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">4. Design and implement a LFU (Least Frequently Used) cache. <span class="difficulty-tag tag-hard">Hard</span></strong>
-                        <div class="details">Topic: Data Structures. Key Concept: Requires maintaining frequency counts and using a doubly linked list or min-heap.</div>
+                        <div class="question-header">
+                            <strong class="question-title">4. Design Google Maps: focus on scale, routing, and real-time updates.</strong>
+                            <span class="difficulty-tag tag-system">System Design</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Key Challenge:</strong> Achieving low-latency routing globally.</p>
+                                <ul>
+                                    <li><strong>Data Storage:</strong> Road network data (nodes, edges) is stored in a distributed graph database. Geographic partitioning (Geo-hashing) is used for sharding.</li>
+                                    <li><strong>Static Content:</strong> Map tiles are pre-rendered and served from a massive, multi-region CDN.</li>
+                                    <li><strong>Real-time Traffic:</strong> Ingested from anonymous user GPS probes via low-latency stream processing (e.g., Kafka/F1). This data updates the weights on the graph edges, dynamically influencing the routing algorithm (A*/Dijkstra's with pre-computed shortcuts).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">5. How would you design a distributed, highly available Load Balancer for a global microservice architecture?</strong>
+                            <span class="difficulty-tag tag-system">System Design</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>High Availability:</strong> Use a two-tiered approach. **L4 (Network Level)** load balancing (like Maglev or equivalent Layer 4 IP forwarding) handles massive traffic volume, distributing requests based on IP/Port. **L7 (Application Level)** load balancing (HTTP headers, URL path) sits closer to the services, handling routing, SSL termination, and rate limiting.</p>
+                                <p><strong>Distribution:</strong> Use **consistent hashing** to map client requests to backend servers, minimizing cache invalidation when servers are added or removed.</p>
+                                <p><strong>Health Checks:</strong> Frequent, non-invasive health checks are crucial for quickly removing failed nodes from the distribution pool.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="question-group">
-                    <h2>System Design (G-Scale)</h2>
+                    <h2><i class="fas fa-users-line" style="margin-right: 10px;"></i>HR & Behavioral ('Googliness' Assessment)</h2>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">1. Design Google Maps: focus on scale, routing, and real-time updates. <span class="difficulty-tag tag-system">System Design</span></strong>
-                        <div class="details">Key Concepts: Geo-hashing, Load Balancing, Microservices, and Graph databases for routing.</div>
+                        <div class="question-header">
+                            <strong class="question-title">6. Tell me about a time you had to challenge a manager or a senior colleague's decision, and the outcome.</strong>
+                            <span class="difficulty-tag tag-behavioral">Behavioral</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation (STAR Method)</h3>
+                                <p><strong>Focus:</strong> Demonstrating intellectual humility and data-driven courage.</p>
+                                <p><strong>S+T:</strong> The manager decided to cut the testing phase on a new API launch to meet a hard deadline (Task: ensure quality despite pressure).</p>
+                                <p><strong>A:</strong> You respectfully presented historical data showing that skipped testing had caused 10% more Sev 1 incidents. You proposed a compromise: launch with limited functionality (MVP) but maintain the necessary integration tests. You offered to work extra hours on the tests.</p>
+                                <p><strong>R:</strong> The manager agreed. The API launched on time, the core functionality was stable, and the full feature set followed one week later with zero bugs, preserving quality.</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">2. Design a Distributed Web Crawler. <span class="difficulty-tag tag-system">System Design</span></strong>
-                        <div class="details">Key Concepts: Frontier management, DNS resolution, Duplication Handling, and Sharding.</div>
+                        <div class="question-header">
+                            <strong class="question-title">7. Describe a time you had to work on a project with vague or ambiguous requirements. How did you proceed?</strong>
+                            <span class="difficulty-tag tag-behavioral">Behavioral</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation (STAR Method)</h3>
+                                <p><strong>Focus:</strong> Dealing with ambiguity, proactivity, and communication.</p>
+                                <p><strong>S+T:</strong> You were tasked with "improving user login security" (too vague). (Task: define measurable goals).</p>
+                                <p><strong>A:</strong> You broke the project down. You scheduled quick 15-minute syncs with stakeholders (PM, Security) to identify key metrics (e.g., failed login attempts, successful MFA adoption rate). You defined a clear, minimal scope (MVP: MFA integration) and documented a "Decision Log" of assumptions made, sharing it with the team.</p>
+                                <p><strong>R:</strong> The documentation reduced confusion and allowed you to deliver the MVP efficiently, which was later expanded based on solid feedback, demonstrating comfort in ambiguity.</p>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">3. Explain the Paxos consensus algorithm and where Google uses it (e.g., Spanner). <span class="difficulty-tag tag-system">Conceptual</span></strong>
-                        <div class="details">Key Concepts: Distributed Consistency, Leader Election, and Quorum requirements.</div>
+                        <div class="question-header">
+                            <strong class="question-title">8. Why Google, and what technology outside of your core focus excites you most right now?</strong>
+                            <span class="difficulty-tag tag-behavioral">HR Core</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Why Google:</strong> Link your desire to work there to their **scale, innovation, and global impact**. Mention specific products (e.g., Kubernetes, TensorFlow, Quantum Computing research) and how your skills (e.g., distributed systems) align with their DNA.</p>
+                                <p><strong>Tech Excitement:</strong> This tests curiosity (a key Googliness trait). Mention something cutting-edge but relevant to the industry, like **WebAssembly (WASM)** for enabling near-native speed in browsers, or **Homomorphic Encryption** for secure cloud computation. This shows breadth of knowledge.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="question-group">
-                    <h2>HR & Behavioral ('Googliness')</h2>
-                    <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">1. Tell me about a time you had to challenge a manager or a senior colleague's decision. <span class="difficulty-tag tag-behavioral">Behavioral</span></strong>
-                        <div class="details">Focus: Courage, Disagree and Commit. Answer using the <strong style="font-weight: 600;">STAR method</strong>.</div>
-                    </div>
-                    <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">2. What does 'Googliness' mean to you, and how do you embody it? <span class="difficulty-tag tag-behavioral">Behavioral</span></strong>
-                        <div class="details">Focus: Culture Fit, Ambiguity, Intellectual Curiosity, and Impact.</div>
-                    </div>
-                    <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">3. Describe a project where you failed, and what did you learn from it? <span class="difficulty-tag tag-behavioral">Behavioral</span></strong>
-                        <div class="details">Focus: Growth Mindset, Resilience, and ability to take <strong style="font-weight: 600;">calculated risks</strong>.</div>
-                    </div>
-                </div>
-                
                 <p style="text-align: center; margin-top: 30px; padding-bottom: 30px;">
-                    <a href="search.html?q=Google" class="cta-button" style="background-color: #4285F4; color: white;">View All 45+ Google Questions on the Search Page</a>
+                    <a href="search.html?q=Google" class="cta-button" style="background-color: #4285F4; border-color: #4285F4; color: white;">View All 45+ Google Questions on the Search Page</a>
                 </p>
             </div>
         </section>
     </main>
 
-    <footer class="footer">...</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="companies.html">Companies</a>
+                <a href="dsa-library.html">DSA</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="footer-text">
+                &copy; 2025 InternAdda Interview Hub. All rights reserved. | <strong style="font-weight: 600;">Crack your dream job with trusted interview questions.</strong>
+            </p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
