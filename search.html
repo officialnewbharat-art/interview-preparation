@@ -4,19 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search 300+ Interview Questions (DSA, System Design, Behavioral) | InternAdda</title>
-    <meta name="description" content="Instantly search the complete InternAdda database of 300+ interview questions. Filter by Company, DSA Topic, System Design, or Behavioral/HR round.">
-    <meta name="keywords" content="interview question search, DSA repository, Find Google questions, search coding problems, InternAdda full question bank">
+    <meta name="description" content="Instantly search the complete InternAdda database of 300+ interview questions with detailed answers. Filter by Company, DSA Topic, System Design, or Behavioral/HR round instantly. Your fastest way to find answers.">
+    <meta name="keywords" content="interview question search, DSA repository, Find Google questions, search coding problems, InternAdda full question bank, search interview answers, technical interview search">
+    
+    <meta property="og:title" content="Full Question Search Hub | InternAdda Interview Hub">
+    <meta property="og:description" content="Access the entire 300+ question database with live filtering and detailed explanations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.internaddainterviewhub.com/search.html">
+
     <link rel="canonical" href="https://www.internaddainterviewhub.com/search.html">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">...</header>
-    
-    <div class="floating-search-bar active" id="floating-search-bar" style="position: static;">
+    <header class="header">
         <div class="container">
-            <input type="text" id="search-input-page" placeholder="Start typing to search all 300+ questions..." autofocus>
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="InternAdda Interview Hub Logo">
+                </a>
+            </div>
+            
+            <div class="main-nav-wrapper">
+                <nav class="nav-links" id="nav-links">
+                    <a href="companies.html">Companies</a>
+                    <a href="dsa-library.html">DSA Library</a>
+                    <a href="system-design.html">System Design</a>
+                    <a href="hr-round.html">HR & Behavioral</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="utility-icons">
+                    <button id="search-trigger" title="Search Questions"><i class="fas fa-search"></i></button>
+                    <button id="theme-toggle" title="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="floating-search-bar active" id="floating-search-bar" style="position: static; padding: 20px 0; box-shadow: none; border-bottom: var(--border-subtle);">
+        <div class="container">
+            <input type="text" id="search-input-page" placeholder="Start typing to search all 300+ questions and answers..." autofocus>
         </div>
     </div>
 
@@ -24,20 +53,33 @@
         <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); padding: 1rem 0; border-bottom: var(--border-subtle);">
             <div class="container" style="text-align: left;">
                 <p style="font-size: 1.1rem; margin-bottom: 0;">Showing results for: <strong id="search-term-display" style="font-weight: 700; color: var(--primary-blue);">All Questions</strong></p>
-                <p style="font-size: 0.9rem; margin-top: 5px; color: var(--text-color-secondary);" id="result-count"></p>
+                <p style="font-size: 0.9rem; margin-top: 5px; color: var(--text-color-secondary);" id="result-count">Loading results...</p>
             </div>
         </section>
 
         <section class="question-list">
             <div class="container">
                 <div id="search-results-container">
-                    <p style="text-align: center; padding: 50px; font-size: 1.2rem; color: #6B7280;">Loading all questions. Please type a keyword to filter results immediately.</p>
+                    <p style="text-align: center; padding: 50px; font-size: 1.2rem; color: #6B7280;">Please wait while the complete question bank loads...</p>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">...</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="companies.html">Companies</a>
+                <a href="dsa-library.html">DSA</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="footer-text">
+                &copy; 2025 InternAdda Interview Hub. All rights reserved. | <strong style="font-weight: 600;">Crack your dream job with trusted interview questions.</strong>
+            </p>
+        </div>
+    </footer>
+    
     <script src="questions-data.js"></script>
     <script src="script.js"></script>
 </body>
