@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arrays and Strings DSA Interview Questions | InternAdda</title>
-    <meta name="description" content="Master 40+ fundamental Arrays and Strings DSA questions for your coding interview. Includes Two Pointers, Sliding Window, Prefix Sums, and common complexity analysis.">
-    <meta name="keywords" content="Arrays DSA, Strings DSA, Two Sum, Sliding Window, Kadane's Algorithm, Rotate Array, Interview Prep, InternAdda coding questions">
+    <title>Top 40+ Arrays and Strings DSA Questions with Detailed Answers | InternAdda</title>
+    <meta name="description" content="Master 40+ fundamental Arrays and Strings DSA questions for your coding interview. Includes detailed answers and explanations for Two Pointers, Sliding Window, and Prefix Sums. Essential for FAANG and top product-based companies.">
+    <meta name="keywords" content="Arrays DSA questions, Strings interview questions, Two Pointers technique, Sliding Window explanation, Kadane's Algorithm, Sort 0 1 2, InternAdda arrays answers, coding interview preparation">
     <link rel="canonical" href="https://www.internaddainterviewhub.com/dsa-arrays.html">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico">
@@ -16,55 +16,123 @@
     <div class="floating-search-bar" id="floating-search-bar">...</div>
 
     <main>
-        <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); border-bottom: 4px solid #10B981;">
+        <section class="hero" style="background-color: var(--background-light); padding: 4rem 0;">
             <div class="container" style="text-align: left;">
                 <h1 style="color: #10B981;">Arrays & Strings Interview Questions</h1>
-                <p>The foundation of coding interviews. Focus on <strong style="font-weight: 600;">Two Pointers, Sliding Window</strong>, and <strong style="font-weight: 600;">O(1) space</strong> optimizations.</p>
+                <p>The foundation of coding interviews. <strong style="font-weight: 600;">40+ highly-asked questions</strong> with complete solutions. Focus: Two Pointers, Sliding Window, and O(1) space optimizations.</p>
             </div>
         </section>
 
         <section class="question-list">
             <div class="container">
                 <div class="question-group">
-                    <h2>Core Array Algorithms (20+ Questions)</h2>
+                    <h2>Core Array Algorithms</h2>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">1. Two Sum: Given an array and a target, return indices of the two numbers such that they add up to the target. <span class="difficulty-tag tag-easy">Easy</span></strong>
-                        <div class="details">Technique: Hash Map. Complexity: O(n) time. <strong style="font-weight: 600;">Follow-up:</strong> Solve without extra space if array is sorted.</div>
+                        <div class="question-header">
+                            <strong class="question-title">1. Two Sum: Given an array and a target, return indices of the two numbers such that they add up to the target.</strong>
+                            <span class="difficulty-tag tag-easy">Easy</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Optimal Technique:</strong> Use a Hash Map (or Dictionary) to store the required complement and its index as you iterate through the array. This reduces the time complexity from O(n<sup>2</sup>) to O(n).</p>
+                                <p><strong>Steps:</strong></p>
+                                <ol>
+                                    <li>Initialize an empty hash map <code>numMap</code>.</li>
+                                    <li>Iterate through the array. For each number <code>num</code>, calculate the <code>complement = target - num</code>.</li>
+                                    <li>Check if <code>complement</code> exists in <code>numMap</code>. If it does, you've found the pair! Return <code>[numMap[complement], current_index]</code>.</li>
+                                    <li>If the complement is not found, add the current number and its index to the map: <code>numMap[num] = current_index</code>.</li>
+                                </ol>
+                                <p><strong>Complexity:</strong> Time: O(n). Space: O(n).</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">2. Container With Most Water: Find two lines that together with the x-axis form a container that contains the most water. <span class="difficulty-tag tag-medium">Medium</span></strong>
-                        <div class="details">Technique: Two Pointers (Greedy approach). Complexity: O(n) time. Avoid the brute force O($n^2$) solution.</div>
+                        <div class="question-header">
+                            <strong class="question-title">2. Container With Most Water: Find two lines that together with the x-axis form a container that contains the most water.</strong>
+                            <span class="difficulty-tag tag-medium">Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Optimal Technique:</strong> Two-Pointer approach. Start with pointers at the extreme ends of the array (widest container) and move the pointer corresponding to the shorter line inward.</p>
+                                <p><strong>Rationale:</strong> The area is determined by <code>min(height[left], height[right]) * (right - left)</code>. Starting wide maximizes <code>(right - left)</code>. To increase the area, you must increase the minimum height. Moving the shorter line gives a better chance of finding a taller line.</p>
+                                <p><strong>Complexity:</strong> Time: O(n). Space: O(1).</p>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">3. Maximum Subarray (Kadane's Algorithm). <span class="difficulty-tag tag-easy">Easy</span></strong>
-                        <div class="details">Technique: Dynamic Programming. Complexity: O(n) time. Must handle negative numbers correctly.</div>
-                    </div>
-                    <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">4. Next Permutation: Find the lexicographically next greater permutation of numbers. <span class="difficulty-tag tag-medium">Medium</span></strong>
-                        <div class="details">Technique: Array Manipulation (Two Pointers/Reversal). Key Steps: Find pivot, find swap, reverse suffix.</div>
+                        <div class="question-header">
+                            <strong class="question-title">3. Sort an array of 0s, 1s, and 2s without using a sorting algorithm (Dutch National Flag).</strong>
+                            <span class="difficulty-tag tag-medium">Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Technique:</strong> Three-pointer partition. Maintain pointers <code>low</code>, <code>mid</code>, and <code>high</code>. The array is partitioned into three sections:</p>
+                                <ul>
+                                    <li>Elements before <code>low</code> are 0s.</li>
+                                    <li>Elements between <code>low</code> and <code>mid</code> are 1s.</li>
+                                    <li>Elements after <code>high</code> are 2s.</li>
+                                </ul>
+                                <p>If <code>arr[mid] == 0</code>, swap with <code>arr[low]</code> and increment <code>low</code> and <code>mid</code>. If <code>arr[mid] == 2</code>, swap with <code>arr[high]</code> and decrement <code>high</code> (only <code>high</code> moves). If <code>arr[mid] == 1</code>, only increment <code>mid</code>.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div class="question-group">
-                    <h2>Sliding Window & String Manipulation (20+ Questions)</h2>
+                    <h2>Strings & Sliding Window</h2>
+
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">5. Longest Substring Without Repeating Characters. <span class="difficulty-tag tag-medium">Medium</span></strong>
-                        <div class="details">Technique: Sliding Window (Hash Set/Map). Complexity: O(n) time.</div>
+                        <div class="question-header">
+                            <strong class="question-title">4. Longest Substring Without Repeating Characters.</strong>
+                            <span class="difficulty-tag tag-medium">Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Technique:</strong> Sliding Window. Use a Hash Set (or a Map to store index) to track characters currently in the window defined by two pointers, <code>left</code> and <code>right</code>.</p>
+                                <p><strong>Process:</strong> Expand the window by moving <code>right</code>. If <code>s[right]</code> is a duplicate, shrink the window by moving <code>left</code> forward until the duplicate is removed. Update the maximum length after every valid step.</p>
+                                <p><strong>Complexity:</strong> Time: O(n). Space: O(min(n, alphabet_size)).</p>
+                            </div>
+                        </div>
                     </div>
+                    
                     <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">6. Minimum Window Substring. <span class="difficulty-tag tag-hard">Hard</span></strong>
-                        <div class="details">Technique: Advanced Sliding Window with two Hash Maps. Used frequently in FAANG coding rounds.</div>
-                    </div>
-                    <div class="question-item">
-                        <strong onclick="this.parentNode.classList.toggle('active');">7. Group Anagrams: Given an array of strings, group anagrams together. <span class="difficulty-tag tag-medium">Medium</span></strong>
-                        <div class="details">Technique: Hash Map (Key is the sorted string or character count map).</div>
+                        <div class="question-header">
+                            <strong class="question-title">5. Minimum Window Substring. (Example of a Hard Question)</strong>
+                            <span class="difficulty-tag tag-hard">Hard</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Technique:</strong> Advanced Sliding Window. Use two frequency maps: one for the target string (T) and one for the current window (S). Track the number of characters in the window that match the required count (the <code>formed</code> variable).</p>
+                                <p><strong>Process:</strong> Expand the window (right pointer). When <code>formed</code> equals the size of the target map, you have a valid window. Contract the window (left pointer) to find the minimum length while maintaining validity. Update the global minimum length.</p>
+                                <p><strong>Complexity:</strong> Time: O(|S| + |T|). Space: O(alphabet_size).</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="footer">...</footer>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-nav">...</div>
+            <p class="footer-text">...</p>
+        </div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
 </html>
