@@ -5,19 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top 40+ Arrays and Strings DSA Questions with Detailed Answers | InternAdda</title>
     <meta name="description" content="Master 40+ fundamental Arrays and Strings DSA questions for your coding interview. Includes detailed answers and explanations for Two Pointers, Sliding Window, and Prefix Sums. Essential for FAANG and top product-based companies.">
-    <meta name="keywords" content="Arrays DSA questions, Strings interview questions, Two Pointers technique, Sliding Window explanation, Kadane's Algorithm, Sort 0 1 2, InternAdda arrays answers, coding interview preparation">
+    <meta name="keywords" content="Arrays DSA questions, Strings interview questions, Two Pointers technique, Sliding Window explanation, Kadane's Algorithm, Sort 0 1 2, InternAdda arrays answers, coding interview preparation, maximum subarray, longest substring without repeating characters">
+    
+    <meta property="og:title" content="Arrays & Strings: 40+ DSA Questions with Detailed Answers | InternAdda">
+    <meta property="og:description" content="Master the foundation of coding interviews with detailed solutions for Array and String problems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.internaddainterviewhub.com/dsa-arrays.html">
+
     <link rel="canonical" href="https://www.internaddainterviewhub.com/dsa-arrays.html">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="header">...</header>
-    <div class="floating-search-bar" id="floating-search-bar">...</div>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="InternAdda Interview Hub Logo">
+                </a>
+            </div>
+            
+            <div class="main-nav-wrapper">
+                <nav class="nav-links" id="nav-links">
+                    <a href="companies.html">Companies</a>
+                    <a href="dsa-library.html" class="active">DSA Library</a>
+                    <a href="system-design.html">System Design</a>
+                    <a href="hr-round.html">HR & Behavioral</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="utility-icons">
+                    <button id="search-trigger" title="Search Questions"><i class="fas fa-search"></i></button>
+                    <button id="theme-toggle" title="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    <div class="floating-search-bar" id="floating-search-bar">
+        <div class="container">
+            <input type="text" id="search-input-global" placeholder="Search 300+ Interview Questions (e.g. 'Two Sum' or 'Sliding Window')">
+        </div>
+    </div>
 
     <main>
-        <section class="hero" style="background-color: var(--background-light); padding: 4rem 0;">
-            <div class="container" style="text-align: left;">
+        <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); padding: 4rem 0;">
+            <div class="container" style="text-align: left; border-left: 4px solid #10B981; padding-left: 15px;">
                 <h1 style="color: #10B981;">Arrays & Strings Interview Questions</h1>
                 <p>The foundation of coding interviews. <strong style="font-weight: 600;">40+ highly-asked questions</strong> with complete solutions. Focus: Two Pointers, Sliding Window, and O(1) space optimizations.</p>
             </div>
@@ -26,7 +59,7 @@
         <section class="question-list">
             <div class="container">
                 <div class="question-group">
-                    <h2>Core Array Algorithms</h2>
+                    <h2><i class="fas fa-list-ol" style="margin-right: 10px;"></i>Core Array Algorithms</h2>
 
                     <div class="question-item">
                         <div class="question-header">
@@ -37,12 +70,12 @@
                         <div class="question-content">
                             <div class="answer-section">
                                 <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
-                                <p><strong>Optimal Technique:</strong> Use a Hash Map (or Dictionary) to store the required complement and its index as you iterate through the array. This reduces the time complexity from O(n<sup>2</sup>) to O(n).</p>
+                                <p><strong>Optimal Technique:</strong> Hash Map (or Dictionary). This approach allows us to reduce the search time from O(n) (in a brute force approach) to O(1) for each element, achieving an overall time complexity of O(n).</p>
                                 <p><strong>Steps:</strong></p>
                                 <ol>
-                                    <li>Initialize an empty hash map <code>numMap</code>.</li>
+                                    <li>Initialize an empty hash map <code>numMap</code> to store <code>(number, index)</code> pairs encountered so far.</li>
                                     <li>Iterate through the array. For each number <code>num</code>, calculate the <code>complement = target - num</code>.</li>
-                                    <li>Check if <code>complement</code> exists in <code>numMap</code>. If it does, you've found the pair! Return <code>[numMap[complement], current_index]</code>.</li>
+                                    <li>Check if the <code>complement</code> already exists as a key in <code>numMap</code>. If it does, we have found the pair. Return <code>[numMap[complement], current_index]</code>.</li>
                                     <li>If the complement is not found, add the current number and its index to the map: <code>numMap[num] = current_index</code>.</li>
                                 </ol>
                                 <p><strong>Complexity:</strong> Time: O(n). Space: O(n).</p>
@@ -59,8 +92,8 @@
                         <div class="question-content">
                             <div class="answer-section">
                                 <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
-                                <p><strong>Optimal Technique:</strong> Two-Pointer approach. Start with pointers at the extreme ends of the array (widest container) and move the pointer corresponding to the shorter line inward.</p>
-                                <p><strong>Rationale:</strong> The area is determined by <code>min(height[left], height[right]) * (right - left)</code>. Starting wide maximizes <code>(right - left)</code>. To increase the area, you must increase the minimum height. Moving the shorter line gives a better chance of finding a taller line.</p>
+                                <p><strong>Optimal Technique:</strong> Two-Pointer approach. Start with pointers at the extreme ends (widest possible container) and greedily move the pointer associated with the shorter line inward.</p>
+                                <p><strong>Rationale:</strong> The area is calculated as $Area = \min(\text{height}[\text{left}], \text{height}[\text{right}]) \times (\text{right} - \text{left})$. Starting wide maximizes the width. To increase the area, you must increase the minimum height. Moving the shorter line gives a better chance of finding a taller boundary compared to moving the already taller one (which would only reduce the width).</p>
                                 <p><strong>Complexity:</strong> Time: O(n). Space: O(1).</p>
                             </div>
                         </div>
@@ -68,27 +101,27 @@
 
                     <div class="question-item">
                         <div class="question-header">
-                            <strong class="question-title">3. Sort an array of 0s, 1s, and 2s without using a sorting algorithm (Dutch National Flag).</strong>
+                            <strong class="question-title">3. Sort an array of 0s, 1s, and 2s without using a sorting algorithm (Dutch National Flag problem).</strong>
                             <span class="difficulty-tag tag-medium">Medium</span>
                             <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
                         </div>
                         <div class="question-content">
                             <div class="answer-section">
                                 <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
-                                <p><strong>Technique:</strong> Three-pointer partition. Maintain pointers <code>low</code>, <code>mid</code>, and <code>high</code>. The array is partitioned into three sections:</p>
+                                <p><strong>Technique:</strong> Three-pointer Partition (Dijkstra's Three-Way Partitioning). Use three pointers: <code>low</code> (boundary for 0s), <code>mid</code> (current element), and <code>high</code> (boundary for 2s).</p>
                                 <ul>
-                                    <li>Elements before <code>low</code> are 0s.</li>
-                                    <li>Elements between <code>low</code> and <code>mid</code> are 1s.</li>
-                                    <li>Elements after <code>high</code> are 2s.</li>
+                                    <li><strong>If <code>arr[mid] == 0</code>:</strong> Swap <code>arr[mid]</code> and <code>arr[low]</code>, increment <code>low</code> and <code>mid</code>.</li>
+                                    <li><strong>If <code>arr[mid] == 1</code>:</strong> Increment <code>mid</code>.</li>
+                                    <li><strong>If <code>arr[mid] == 2</code>:</strong> Swap <code>arr[mid]</code> and <code>arr[high]</code>, and decrement <code>high</code>. Crucially, **do not increment <code>mid</code>** because the element swapped from <code>high</code> needs to be checked.</li>
                                 </ul>
-                                <p>If <code>arr[mid] == 0</code>, swap with <code>arr[low]</code> and increment <code>low</code> and <code>mid</code>. If <code>arr[mid] == 2</code>, swap with <code>arr[high]</code> and decrement <code>high</code> (only <code>high</code> moves). If <code>arr[mid] == 1</code>, only increment <code>mid</code>.</p>
+                                <p><strong>Complexity:</strong> Time: O(n). Space: O(1).</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="question-group">
-                    <h2>Strings & Sliding Window</h2>
+                    <h2><i class="fas fa-sliders-h" style="margin-right: 10px;"></i>Strings & Sliding Window</h2>
 
                     <div class="question-item">
                         <div class="question-header">
@@ -99,9 +132,14 @@
                         <div class="question-content">
                             <div class="answer-section">
                                 <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
-                                <p><strong>Technique:</strong> Sliding Window. Use a Hash Set (or a Map to store index) to track characters currently in the window defined by two pointers, <code>left</code> and <code>right</code>.</p>
-                                <p><strong>Process:</strong> Expand the window by moving <code>right</code>. If <code>s[right]</code> is a duplicate, shrink the window by moving <code>left</code> forward until the duplicate is removed. Update the maximum length after every valid step.</p>
-                                <p><strong>Complexity:</strong> Time: O(n). Space: O(min(n, alphabet_size)).</p>
+                                <p><strong>Technique:</strong> Sliding Window. Use a Hash Set (or a Map) to efficiently track the characters currently present within the window defined by two pointers, <code>left</code> and <code>right</code>.</p>
+                                <p><strong>Process:</strong></p>
+                                <ol>
+                                    <li>Expand the window by moving the <code>right</code> pointer forward and adding <code>s[right]</code> to the set.</li>
+                                    <li>If <code>s[right]</code> is already in the set (duplicate found), shrink the window by moving the <code>left</code> pointer forward and removing <code>s[left]</code> from the set until the duplicate is gone.</li>
+                                    <li>After every step, update the maximum length found: $max\_len = \max(max\_len, \text{right} - \text{left} + 1)$.</li>
+                                </ol>
+                                <p><strong>Complexity:</strong> Time: O(n). Space: O(min(n, alphabet\_size)).</p>
                             </div>
                         </div>
                     </div>
@@ -115,9 +153,13 @@
                         <div class="question-content">
                             <div class="answer-section">
                                 <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
-                                <p><strong>Technique:</strong> Advanced Sliding Window. Use two frequency maps: one for the target string (T) and one for the current window (S). Track the number of characters in the window that match the required count (the <code>formed</code> variable).</p>
-                                <p><strong>Process:</strong> Expand the window (right pointer). When <code>formed</code> equals the size of the target map, you have a valid window. Contract the window (left pointer) to find the minimum length while maintaining validity. Update the global minimum length.</p>
-                                <p><strong>Complexity:</strong> Time: O(|S| + |T|). Space: O(alphabet_size).</p>
+                                <p><strong>Technique:</strong> Advanced Sliding Window with two Frequency Maps. This uses a "needed" map (for target string T) and a "window" map (for current string S). A crucial variable, <code>formed</code>, tracks how many unique characters in T are matched in the window S.</p>
+                                <p><strong>Process:</strong></p>
+                                <ul>
+                                    <li><strong>Expansion:</strong> Move the <code>right</code> pointer, updating the window map. Check if the character count now satisfies the need. If so, increment <code>formed</code>.</li>
+                                    <li><strong>Contraction:</strong> Once <code>formed</code> equals the total number of unique characters needed, you have a valid window. Contract the window by moving the <code>left</code> pointer forward until validity is broken. Update the global minimum length during this contraction phase.</li>
+                                </ul>
+                                <p><strong>Complexity:</strong> Time: O(|S| + |T|). Space: O(alphabet\_size).</p>
                             </div>
                         </div>
                     </div>
@@ -128,8 +170,15 @@
 
     <footer class="footer">
         <div class="container">
-            <div class="footer-nav">...</div>
-            <p class="footer-text">...</p>
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="companies.html">Companies</a>
+                <a href="dsa-library.html">DSA</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="footer-text">
+                &copy; 2025 InternAdda Interview Hub. All rights reserved. | <strong style="font-weight: 600;">Crack your dream job with trusted interview questions.</strong>
+            </p>
         </div>
     </footer>
 
