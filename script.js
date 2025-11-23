@@ -1,7 +1,7 @@
-/* script.js - InternAdda Interview Hub */
+/* script.js - InternAdda Interview Hub (Revised Core Logic) */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. Header, Navigation, and Theme Toggle ---
+    // --- 1. Header, Navigation, and Theme Toggle (Same as before, but reliable) ---
     const menuToggle = document.getElementById('menu-toggle');
     const navLinks = document.getElementById('nav-links');
     const searchTrigger = document.getElementById('search-trigger');
@@ -10,17 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
 
-    // Mobile Menu Toggle
     if (menuToggle) {
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
     }
 
-    // Search Bar Toggle & Redirection
     if (searchTrigger) {
         searchTrigger.addEventListener('click', () => {
-            // If on search page, just focus input. Otherwise, show/hide floating bar.
             if (window.location.pathname.endsWith('search.html')) {
                 document.getElementById('search-input-page')?.focus();
             } else {
@@ -32,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // Global Search: Redirect on Enter
     if (globalSearchInput) {
         globalSearchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter' && globalSearchInput.value.trim() !== '') {
@@ -42,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Dark/Light Mode
     if (themeToggle) {
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark-mode') {
@@ -60,20 +55,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 2. Question Card Details Toggle (Accordion) ---
-    // Note: Inline onclick event is added in HTML for better static compatibility, 
-    // but this JS loop ensures all dynamically loaded items also work if the HTML 
-    // structure changes or is loaded via AJAX (good practice).
-    document.querySelectorAll('.question-item').forEach(item => {
-        // Find the strong tag inside to attach a listener, avoiding double listeners if inline is used.
-        const strongTag = item.querySelector('strong'); 
-        if (strongTag) {
-            strongTag.addEventListener('click', (e) => {
-                // Prevent click from propagating to the parent item if needed, but here we toggle the parent
-                item.classList.toggle('active');
-            });
-        }
-    });
+    // --- 2. Question Accordion Toggle (Handles static and dynamic content) ---
+    const setupAccordion = () => {
+        document.querySelectorAll('.question-item').forEach(item => {
+            const header = item.querySelector('.question-header');
+            if (header) {
+                header.onclick = (e) => {
+                    item.classList.toggle('active');
+                };
+            }
+        });
+    };
+    setupAccordion(); // Setup for static HTML pages
 
     // --- 3. Client-Side Search Logic (Specific to search.html) ---
     if (window.location.pathname.endsWith('search.html') && typeof window.INTERN_ADDA_QUESTIONS !== 'undefined') {
@@ -83,18 +76,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const resultCount = document.getElementById('result-count');
         const allQuestions = window.INTERN_ADDA_QUESTIONS; 
 
-        // Helper function to get the difficulty tag class
-        const getDifficultyTag = (type, topic) => {
-            const lowerType = type.toLowerCase();
+        // Helper function to determine the tag class based on topic/difficulty
+        const getTagClass = (topic) => {
             const lowerTopic = topic.toLowerCase();
-            
-            if (lowerType === 'system design' || lowerType === 'technical' || lowerTopic.includes('system')) return 'tag-system';
-            if (lowerType.includes('behavioral') || lowerType.includes('hr')) return 'tag-behavioral';
-
-            // Check difficulty for coding questions based on topic/complexity
-            if (lowerTopic.includes('hard') || lowerTopic.includes('advanced') || lowerTopic.includes('lfu') || lowerTopic.includes('min window')) return 'tag-hard';
-            if (lowerTopic.includes('medium') || lowerTopic.includes('two pointers') || lowerTopic.includes('dp')) return 'tag-medium';
-            return 'tag-easy'; // Default for core/easy
+            if (lowerTopic.includes('hard') || lowerTopic.includes('lfu') || lowerTopic.includes('advanced')) return { tag: 'Hard', class: 'tag-hard' };
+            if (lowerTopic.includes('medium') || lowerTopic.includes('dp') || lowerTopic.includes('sliding window')) return { tag: 'Medium', class: 'tag-medium' };
+            if (lowerTopic.includes('easy') || lowerTopic.includes('core')) return { tag: 'Easy', class: 'tag-easy' };
+            if (lowerTopic.includes('system design') || lowerTopic.includes('networks')) return { tag: 'System', class: 'tag-system' };
+            if (lowerTopic.includes('behavioral') || lowerTopic.includes('hr') || lowerTopic.includes('lp')) return { tag: 'Behavioral', class: 'tag-behavioral' };
+            return { tag: 'DSA', class: 'tag-easy' };
         };
 
         const renderResults = (query, questions) => {
@@ -102,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const lowerCaseQuery = query.toLowerCase();
             const filteredQuestions = questions.filter(q => 
                 q.question.toLowerCase().includes(lowerCaseQuery) ||
+                q.answer.toLowerCase().includes(lowerCaseQuery) ||
                 q.topic.toLowerCase().includes(lowerCaseQuery) ||
                 q.company.toLowerCase().includes(lowerCaseQuery) ||
                 q.type.toLowerCase().includes(lowerCaseQuery)
@@ -111,13 +102,13 @@ document.addEventListener('DOMContentLoaded', () => {
             resultCount.textContent = `Found ${filteredQuestions.length} results.`;
             
             if (filteredQuestions.length === 0) {
-                resultsContainer.innerHTML = `<p style="text-align: center; padding: 50px; font-size: 1.2rem; color: #EF4444;">No results found for "${query}". Try a different term.</p>`;
+                resultsContainer.innerHTML = `<p style="text-align: center; padding: 50px; font-size: 1.2rem; color: #EF4444;">No results found for "${query}". Try a different term or check your spelling.</p>`;
                 return;
             }
 
-            // Grouping: Company > Topic
+            // Grouping: Company > Topic (for search results)
             const groupedResults = filteredQuestions.reduce((acc, question) => {
-                const groupKey = `${question.company || 'General'} - ${question.topic || question.type || 'Miscellaneous'}`;
+                const groupKey = `${question.company || 'General'} - ${question.type || 'Coding'} / ${question.topic.split(' (')[0]}`;
                 if (!acc[groupKey]) acc[groupKey] = [];
                 acc[groupKey].push(question);
                 return acc;
@@ -126,31 +117,32 @@ document.addEventListener('DOMContentLoaded', () => {
             for (const groupKey in groupedResults) {
                 const groupElement = document.createElement('div');
                 groupElement.classList.add('question-group');
-                groupElement.innerHTML = `<h2><i class="fas fa-flask" style="color: var(--primary-blue); margin-right: 10px;"></i>${groupKey}</h2>`;
+                groupElement.innerHTML = `<h2><i class="fas fa-list-check" style="color: var(--primary-blue); margin-right: 10px;"></i>${groupKey}</h2>`;
 
                 groupedResults[groupKey].forEach(q => {
-                    const tagClass = getDifficultyTag(q.type, q.topic);
+                    const tagInfo = getTagClass(q.topic);
                     const item = document.createElement('div');
                     item.classList.add('question-item');
                     item.innerHTML = `
-                        <strong class="question-title">
-                            ${q.question} 
-                            <span class="difficulty-tag ${tagClass}">${q.topic.split('/')[0] || q.type}</span>
-                        </strong>
-                        <div class="details">
-                            <strong style="font-weight: 600;">Area:</strong> ${q.type || 'N/A'}. 
-                            <strong style="font-weight: 600;">Topic:</strong> ${q.topic || 'N/A'}. 
-                            <strong style="font-weight: 600;">Source:</strong> ${q.company || 'General'}.
+                        <div class="question-header">
+                            <strong class="question-title">${q.question}</strong>
+                            <span class="difficulty-tag ${tagInfo.class}">${tagInfo.tag}</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                ${q.answer}
+                            </div>
                         </div>
                     `;
-                    item.querySelector('strong').addEventListener('click', () => item.classList.toggle('active'));
+                    item.querySelector('.question-header').addEventListener('click', () => item.classList.toggle('active'));
                     groupElement.appendChild(item);
                 });
                 resultsContainer.appendChild(groupElement);
             }
         };
 
-        // Initialize search from URL or input
         const urlParams = new URLSearchParams(window.location.search);
         const initialQuery = urlParams.get('q');
         
@@ -158,8 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.value = initialQuery;
             renderResults(initialQuery, allQuestions);
         } else {
-             // Show all questions as default on the search page
-             renderResults('', allQuestions);
+             renderResults('', allQuestions.slice(0, 50)); // Show first 50 questions as a highly relevant default
         }
 
         searchInput.addEventListener('input', () => {
