@@ -3,9 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InternAdda Interview Hub - Crack Your Dream Job</title>
-    <meta name="description" content="InternAdda Interview Hub: Your trusted source for 300+ interview questions, including DSA, System Design, HR, and company-specific questions for Google, Amazon, Meta, and more.">
-    <meta name="keywords" content="interview questions, DSA, system design, HR interview, Google, Amazon, Meta, InternAdda, coding interview">
+    <title>InternAdda Interview Hub | 300+ Trusted Interview Questions (DSA, System Design, FAANG)</title>
+    <meta name="description" content="Crack your dream job with InternAdda Interview Hub. Access 300+ premium interview questions for Google, Amazon, Microsoft, and specialized DSA, System Design, and Behavioral rounds. Your ultimate preparation guide.">
+    <meta name="keywords" content="internadda, interview questions, DSA, system design, HR, behavioral questions, Google interview, Amazon SDE, Microsoft SWE, FAANG preparation, coding interview, interview hub">
+    
+    <meta property="og:title" content="InternAdda Interview Hub: 300+ Trusted Interview Questions">
+    <meta property="og:description" content="The ultimate guide for DSA, System Design, and Company-Specific interview preparation. Get job-ready today.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.internaddainterviewhub.com/">
+    <link rel="canonical" href="https://www.internaddainterviewhub.com/">
+
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -15,7 +22,9 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <a href="index.html">InternAdda <span>Hub</span></a>
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="InternAdda Interview Hub Logo">
+                </a>
             </div>
             <nav class="nav-links" id="nav-links">
                 <a href="companies.html">Companies</a>
@@ -34,42 +43,47 @@
 
     <div class="floating-search-bar" id="floating-search-bar">
         <div class="container">
-            <input type="text" id="search-input-global" placeholder="Search 300+ Questions (e.g. 'Two Sum' or 'Google')">
+            <input type="text" id="search-input-global" placeholder="Search 300+ Interview Questions (e.g. 'Two Sum' or 'Amazon LP')">
         </div>
     </div>
 
     <main>
         <section class="hero">
-            <div class="container">
-                <h1>InternAdda Interview Hub</h1>
-                <p>"Crack your dream job with **trusted** interview questions."</p>
-                <a href="companies.html" class="cta-button">Start Preparing Now</a>
+            <div class="container" style="text-align: left;">
+                <p style="color: var(--primary-blue); font-weight: 600; margin-bottom: 5px;"><i class="fas fa-rocket"></i> Launch Your Career</p>
+                <h1>India's <span style="color: var(--primary-blue);">Adda</span> for <br> 
+                    <span style="font-size: 3rem; background-image: linear-gradient(90deg, #6366F1, #2563EB); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Interview Prep</span>
+                </h1>
+                <p>The perfect launchpad for your career. Gain in-demand skills and secure paid placements 
+                    with the most <strong style="font-weight: 600;">trusted interview questions</strong>.</p>
+                <a href="dsa-library.html" class="cta-button">Master DSA Now</a>
+                <a href="companies.html" class="cta-button" style="background-color: transparent; border: 2px solid var(--primary-blue); color: var(--primary-blue); margin-left: 15px;">Explore Companies</a>
             </div>
         </section>
 
         <section class="company-categories">
             <div class="container">
-                <h2 class="section-title">🚀 Top Company Guides</h2>
+                <h2 class="section-title">🚀 Top Company Guides & Packages</h2>
                 <div class="grid-cards">
                     <a href="google.html" class="card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google Logo" class="logo-img">
-                        <h3>Google</h3>
-                        <p>40+ Questions: Coding, System Design & G-Worthy HR.</p>
+                        <h3>Google (Alphabet)</h3>
+                        <p>45+ Questions: Coding, <strong style="font-weight: 600;">System Design</strong>, and "Googliness".</p>
                     </a>
                     <a href="amazon.html" class="card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon Logo" class="logo-img">
                         <h3>Amazon</h3>
-                        <p>40+ Questions focused on Leadership Principles (LPs).</p>
+                        <p>45+ Questions focused on <strong style="font-weight: 600;">16 Leadership Principles (LPs)</strong>.</p>
                     </a>
                     <a href="microsoft.html" class="card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft Logo" class="logo-img">
                         <h3>Microsoft</h3>
-                        <p>40+ Questions: Focus on OS, Networks, and Azure.</p>
+                        <p>40+ Questions: Deep dive into <strong style="font-weight: 600;">OS, Networks</strong>, and Azure.</p>
                     </a>
                     <a href="meta.html" class="card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/Meta_Platforms_Inc._logo.svg" alt="Meta Logo" class="logo-img">
-                        <h3>Meta</h3>
-                        <p>20+ Questions: Scaling Social and Product Sense.</p>
+                        <h3>Meta (Facebook)</h3>
+                        <p>30+ Questions: Scaling Social Media & <strong style="font-weight: 600;">Product Sense</strong>.</p>
                     </a>
                 </div>
             </div>
@@ -77,27 +91,27 @@
 
         <section class="general-categories">
             <div class="container">
-                <h2 class="section-title">📚 Fundamental Pillars</h2>
+                <h2 class="section-title">📚 Fundamental Interview Pillars</h2>
                 <div class="grid-cards">
                     <a href="dsa-library.html" class="card">
-                        <i class="fas fa-code fa-3x" style="color: var(--primary-blue);"></i>
+                        <i class="fas fa-code fa-2x" style="color: var(--primary-blue); margin-bottom: 5px;"></i>
                         <h3>DSA Library</h3>
-                        <p>150+ questions on Arrays, Trees, Graphs, DP, and more.</p>
+                        <p><strong style="font-weight: 600;">150+ questions</strong> on Arrays, Trees, Graphs, DP, and more.</p>
                     </a>
                     <a href="system-design.html" class="card">
-                        <i class="fas fa-cogs fa-3x" style="color: var(--primary-blue);"></i>
+                        <i class="fas fa-cogs fa-2x" style="color: var(--primary-blue); margin-bottom: 5px;"></i>
                         <h3>System Design</h3>
-                        <p>20+ questions: Architecting large-scale distributed systems.</p>
+                        <p><strong style="font-weight: 600;">20+ large-scale</strong> designs (Twitter, Netflix, TinyURL).</p>
                     </a>
                     <a href="hr-round.html" class="card">
-                        <i class="fas fa-handshake fa-3x" style="color: var(--primary-blue);"></i>
+                        <i class="fas fa-handshake fa-2x" style="color: var(--primary-blue); margin-bottom: 5px;"></i>
                         <h3>HR Round</h3>
-                        <p>20+ essential questions to assess fit and communication.</p>
+                        <p><strong style="font-weight: 600;">20+ essential questions</strong> to assess fit and communication.</p>
                     </a>
                     <a href="behavioral.html" class="card">
-                        <i class="fas fa-users-line fa-3x" style="color: var(--primary-blue);"></i>
+                        <i class="fas fa-users-line fa-2x" style="color: var(--primary-blue); margin-bottom: 5px;"></i>
                         <h3>Behavioral</h3>
-                        <p>20+ questions: The STAR method for success stories.</p>
+                        <p><strong style="font-weight: 600;">20+ STAR-method</strong> questions for leadership and conflict.</p>
                     </a>
                 </div>
             </div>
@@ -113,7 +127,7 @@
                 <a href="contact.html">Contact</a>
             </div>
             <p class="footer-text">
-                &copy; 2025 InternAdda Interview Hub. All rights reserved. | Built for the next generation of engineers.
+                &copy; 2025 InternAdda Interview Hub. All rights reserved. | <strong style="font-weight: 600;">Crack your dream job with trusted interview questions.</strong>
             </p>
         </div>
     </footer>
