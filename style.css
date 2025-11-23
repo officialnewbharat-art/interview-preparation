@@ -1,25 +1,30 @@
-/* style.css - InternAdda Interview Hub */
+/* style.css - InternAdda Interview Hub (Professional UI Refinement) */
 
 /* --- 0. Variables and Global Reset --- */
 :root {
     --primary-blue: #2563EB; /* InternAdda Blue */
     --secondary-blue: #60A5FA;
-    --background-light: #F9FAFB;
-    --background-dark: #1F2937;
-    --text-color-light: #1F2937;
-    --text-color-dark: #F9FAFB;
+    --background-light: #FFFFFF; /* Bright, clean background */
+    --page-background: #F9FAFB;
+    --text-color-primary: #1F2937;
+    --text-color-secondary: #6B7280;
     --card-background: #FFFFFF;
-    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --header-height: 60px;
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08); /* Soft, professional shadow */
+    --border-subtle: 1px solid #E5E7EB;
+    --header-height: 64px;
     --spacing: 1.5rem;
+    --font-weight-bold: 700;
 }
 
-/* Dark Mode (Optional, but included for premium feel) */
+/* Dark Mode (Optional refinement) */
 body.dark-mode {
     --background-light: #1F2937;
-    --text-color-light: #F9FAFB;
-    --card-background: #374151;
-    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --page-background: #111827;
+    --text-color-primary: #F9FAFB;
+    --text-color-secondary: #9CA3AF;
+    --card-background: #1F2937;
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --border-subtle: 1px solid #374151;
 }
 
 * {
@@ -31,8 +36,8 @@ body.dark-mode {
 body {
     font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    background-color: var(--background-light);
-    color: var(--text-color-light);
+    background-color: var(--page-background);
+    color: var(--text-color-primary);
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -52,7 +57,7 @@ a:hover {
     padding: 0 var(--spacing);
 }
 
-/* --- 1. Header & Navigation (Sticky) --- */
+/* --- 1. Header & Navigation --- */
 .header {
     background-color: var(--card-background);
     box-shadow: var(--shadow-soft);
@@ -62,379 +67,193 @@ a:hover {
     height: var(--header-height);
     display: flex;
     align-items: center;
-    transition: background-color 0.3s;
+    border-bottom: var(--border-subtle);
 }
 
-.header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo a {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--primary-blue);
-    display: flex;
-    align-items: center;
-}
-
-.logo span {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--secondary-blue);
-    margin-left: 5px;
+.logo img {
+    height: 35px; /* Adjust size for professional look */
+    width: auto;
 }
 
 .nav-links a {
-    margin-left: var(--spacing);
-    font-weight: 600;
+    margin-left: 2rem;
+    font-weight: 500;
     padding: 5px 0;
-    position: relative;
-    transition: opacity 0.2s;
+    transition: color 0.2s, opacity 0.2s;
+    color: var(--text-color-secondary); /* Subdued nav links */
 }
 
-.nav-links a:hover {
-    opacity: 0.8;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--primary-blue);
-    transition: width 0.3s ease-out;
-}
-
-.nav-links a:hover::after, .nav-links a.active::after {
-    width: 100%;
-}
-
-.menu-toggle {
-    display: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--text-color-light);
-}
-
-/* --- 2. Floating Search Bar & Theme Toggle --- */
-.search-toggle-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-#search-trigger, #theme-toggle {
-    background: none;
-    border: none;
+.nav-links a:hover, .nav-links a.active {
     color: var(--primary-blue);
-    cursor: pointer;
-    font-size: 1.25rem;
-    padding: 5px;
-    transition: color 0.2s;
 }
 
-#search-trigger:hover, #theme-toggle:hover {
-    color: var(--secondary-blue);
-}
-
+/* --- 2. Floating Search Bar & Toggle --- */
 .floating-search-bar {
-    position: fixed;
-    top: -100px; /* Hidden initially */
-    left: 0;
-    width: 100%;
-    background-color: var(--card-background);
-    padding: 15px 0;
-    box-shadow: var(--shadow-soft);
-    z-index: 999;
-    transition: top 0.4s ease-in-out;
-}
-
-.floating-search-bar.active {
-    top: var(--header-height);
+    /* Style identical to header's box-shadow for visual continuity */
+    box-shadow: var(--shadow-soft); 
 }
 
 .floating-search-bar input[type="text"] {
-    width: 90%;
-    padding: 10px 15px;
-    border: 2px solid var(--primary-blue);
-    border-radius: 8px;
-    font-size: 1rem;
-    margin: 0 auto;
-    display: block;
-    outline: none;
+    border: var(--border-subtle);
+    background-color: var(--page-background);
 }
 
-/* --- 3. Hero Section (Home) --- */
+/* --- 3. Hero Section (Clean and Professional) --- */
 .hero {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 4rem 0;
+    background-color: var(--background-light); /* White background for separation */
+    color: var(--text-color-primary);
+    padding: 3rem 0;
     text-align: center;
-    margin-bottom: var(--spacing);
+    border-bottom: var(--border-subtle);
 }
 
 .hero h1 {
     font-size: 2.5rem;
+    font-weight: var(--font-weight-bold);
     margin-bottom: 0.5rem;
 }
 
 .hero p {
-    font-size: 1.2rem;
-    opacity: 0.9;
+    font-size: 1.1rem;
+    color: var(--text-color-secondary);
     margin-bottom: var(--spacing);
 }
 
 .cta-button {
-    display: inline-block;
-    background-color: white;
-    color: var(--primary-blue);
+    background-color: var(--primary-blue);
+    color: white;
     padding: 12px 30px;
-    border-radius: 8px;
-    font-weight: 700;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    font-weight: var(--font-weight-bold);
     transition: background-color 0.2s, transform 0.2s;
 }
 
 .cta-button:hover {
-    background-color: var(--background-light);
-    transform: translateY(-2px);
+    background-color: #1E40AF;
+    transform: none; /* Keep it clean */
 }
 
-/* --- 4. Content Cards & Layout --- */
+/* --- 4. Content Cards & Layout (HackerRank/Modern Card Style) --- */
 .section-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    text-align: center;
-    margin: 3rem 0 2rem;
+    font-size: 1.8rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--text-color-primary);
+    text-align: left;
+    margin: 3rem 0 1.5rem;
+    padding-left: var(--spacing); /* Align with container content */
+    border-left: 4px solid var(--primary-blue);
 }
 
 .grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--spacing);
-    padding-bottom: 3rem;
+    gap: 1.25rem; /* Tighter gap for a more compact UI */
 }
 
 .card {
-    background-color: var(--card-background);
     padding: var(--spacing);
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: var(--shadow-soft);
-    transition: transform 0.3s, box-shadow 0.3s;
-    text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: left;
+    border: var(--border-subtle);
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 .card h3 {
+    font-size: 1.15rem;
     color: var(--primary-blue);
     margin-top: 10px;
-    font-size: 1.25rem;
 }
 
 .card p {
-    font-size: 0.95rem;
-    color: #6B7280;
-    margin: 10px 0;
+    font-size: 0.9rem;
+    color: var(--text-color-secondary);
 }
 
-.card img.logo-img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    margin: 0 auto;
+.card i {
+    color: var(--primary-blue);
 }
 
-/* Specific styling for the DSA/Topic pages (Question List) */
+/* --- 5. Question List (HackerRank List Style) --- */
 .question-list {
-    padding-top: var(--spacing);
+    padding-top: 1rem;
     padding-bottom: 5rem;
 }
 
-.question-list .question-group {
-    margin-bottom: 3rem;
-}
-
 .question-group h2 {
-    color: var(--primary-blue);
-    border-bottom: 2px solid var(--secondary-blue);
-    padding-bottom: 10px;
-    margin-bottom: var(--spacing);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    padding: 10px 0;
+    margin-bottom: 1rem;
+    border-bottom: var(--border-subtle);
 }
 
 .question-item {
     background-color: var(--card-background);
-    padding: 15px;
-    border-radius: 8px;
+    padding: 15px 20px;
+    border-radius: 6px;
     margin-bottom: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    transition: background-color 0.2s, box-shadow 0.2s;
-    cursor: pointer;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .question-item:hover {
-    background-color: var(--background-light);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-color: var(--secondary-blue);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.question-item strong {
+.question-item <strong> {
     display: block;
-    font-size: 1.1rem;
-    color: var(--text-color-light);
-    margin-bottom: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color-primary);
+    cursor: pointer;
 }
 
 .question-item .details {
     display: none;
     padding-top: 10px;
-    border-top: 1px dashed #D1D5DB;
     margin-top: 10px;
-    font-style: italic;
     font-size: 0.9rem;
-    color: #6B7280;
+    color: #4B5563; /* Darker gray for details */
+    border-top: 1px dashed #D1D5DB;
 }
 
 .question-item.active .details {
     display: block;
 }
 
-
-/* --- 5. Contact Page Form --- */
-.contact-form {
-    max-width: 600px;
-    margin: 3rem auto 5rem;
-    padding: var(--spacing);
-    background-color: var(--card-background);
-    border-radius: 12px;
-    box-shadow: var(--shadow-soft);
+/* Difficulty/Status Tags */
+.difficulty-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: var(--font-weight-bold);
 }
 
-.contact-form label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
+.tag-easy { background-color: #ECFDF5; color: #059669; } /* Green */
+.tag-medium { background-color: #FEF3C7; color: #D97706; } /* Yellow/Orange */
+.tag-hard { background-color: #FEE2E2; color: #EF4444; } /* Red */
+.tag-system { background-color: #DBEAFE; color: #2563EB; } /* Blue */
+.tag-behavioral { background-color: #EDE9FE; color: #6366F1; } /* Indigo */
 
-.contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: var(--spacing);
-    border: 1px solid #D1D5DB;
-    border-radius: 6px;
-    font-size: 1rem;
-    background-color: var(--background-light);
-    color: var(--text-color-light);
-    transition: border-color 0.2s;
-}
-
-.contact-form input:focus, .contact-form textarea:focus {
-    border-color: var(--primary-blue);
-    outline: none;
-}
-
-.contact-form button {
-    background-color: var(--primary-blue);
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-.contact-form button:hover {
-    background-color: #1E40AF;
-}
-
-/* --- 6. Footer --- */
+/* --- 6. Footer and Responsiveness (as before, but refined font weights) --- */
 .footer {
     background-color: #1F2937;
-    color: white;
-    padding: var(--spacing) 0;
-    text-align: center;
-    margin-top: auto; /* Ensures footer sticks to bottom */
 }
 
-.footer-nav a {
-    color: var(--secondary-blue);
-    margin: 0 10px;
-    font-size: 0.9rem;
-}
-
-.footer-text {
-    margin-top: 10px;
-    font-size: 0.85rem;
-    opacity: 0.7;
-}
-
-
-/* --- 7. Responsiveness (Mobile Optimization) --- */
+/* Mobile Adjustments */
 @media (max-width: 768px) {
-    .header {
-        height: 50px;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        width: 100%;
-        background-color: var(--card-background);
-        box-shadow: var(--shadow-soft);
-        padding: 10px 0;
-        text-align: center;
-        flex-direction: column;
-        z-index: 990;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .nav-links a {
-        margin: 10px 0;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .nav-links a:last-child {
-        border-bottom: none;
-    }
-
-    .menu-toggle {
-        display: block;
-    }
-
-    .hero {
-        padding: 2rem 0;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
     .section-title {
-        font-size: 1.75rem;
-    }
-
-    .grid-cards {
-        grid-template-columns: 1fr;
+        padding-left: 0;
+        border-left: none;
+        text-align: center;
+        margin: 2rem 0 1rem;
     }
 }
