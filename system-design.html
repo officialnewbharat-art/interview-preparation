@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Design Interview Questions (20+ Large Scale) | InternAdda</title>
+    <meta name="description" content="20+ essential System Design interview questions for architecting large-scale, distributed systems like Twitter, Netflix, and TinyURL. Includes comprehensive answers on scaling, consistency, and databases. Prepare for senior SDE roles.">
+    <meta name="keywords" content="System Design, Design Twitter, Design Netflix, CAP Theorem, Sharding, Distributed Systems, Microservices, System Design Interview Answers, Load Balancing, Caching strategy">
+    
+    <meta property="og:title" content="20+ System Design Questions with Detailed Explanations | InternAdda">
+    <meta property="og:description" content="Master scalability, reliability, and distributed architectures for FAANG and top product companies.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.internaddainterviewhub.com/system-design.html">
+
+    <link rel="canonical" href="https://www.internaddainterviewhub.com/system-design.html">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assets/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.jpg" alt="InternAdda Interview Hub Logo">
+                </a>
+            </div>
+            
+            <div class="main-nav-wrapper">
+                <nav class="nav-links" id="nav-links">
+                    <a href="companies.html">Companies</a>
+                    <a href="dsa-library.html">DSA Library</a>
+                    <a href="system-design.html" class="active">System Design</a>
+                    <a href="hr-round.html">HR & Behavioral</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+                <div class="utility-icons">
+                    <button id="search-trigger" title="Search Questions"><i class="fas fa-search"></i></button>
+                    <button id="theme-toggle" title="Toggle Dark/Light Mode"><i class="fas fa-moon"></i></button>
+                </div>
+                <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars"></i></div>
+            </div>
+        </div>
+    </header>
+    <div class="floating-search-bar" id="floating-search-bar">
+        <div class="container">
+            <input type="text" id="search-input-global" placeholder="Search 300+ Interview Questions (e.g. 'Design Netflix' or 'CAP Theorem')">
+        </div>
+    </div>
+
+    <main>
+        <section class="hero" style="background-color: var(--background-light); color: var(--text-color-primary); padding: 4rem 0;">
+            <div class="container" style="text-align: left; border-left: 4px solid #F59E0B; padding-left: 15px;">
+                <h1 style="color: #F59E0B;">System Design Interview Questions</h1>
+                <p>20+ Questions. Master scalability, reliability, and distributed architectures with <strong style="font-weight: 600;">detailed design breakdowns</strong>.</p>
+                <a href="search.html?q=System+Design" class="cta-button" style="background-color: #F59E0B; border-color: #F59E0B; margin-top: 20px;">Search All System Designs</a>
+            </div>
+        </section>
+
+        <section class="question-list">
+            <div class="container">
+                <div class="question-group">
+                    <h2><i class="fas fa-layer-group" style="margin-right: 10px;"></i>Large-Scale System Designs (Top 4)</h2>
+                    
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">1. Design Twitter (or a Feed/Timeline Service).</strong>
+                            <span class="difficulty-tag tag-system">Scale: Hard</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Key Challenge:</strong> The "Fanout" mechanism. Tweets need to reach millions of followers instantly.</p>
+                                <ul>
+                                    <li><strong>Fanout-on-Write (Push Model):</strong> Used for tweets by celebrities (high follower count). The tweet is immediately pushed into all followers' inboxes/timelines. Ensures fast read time but has high write load.</li>
+                                    <li><strong>Fanout-on-Read (Pull Model):</strong> Used for users with massive follower counts (e.g., millions). The user's timeline is generated dynamically when they load the app. Saves write load but increases read latency.</li>
+                                    <li><strong>Storage:</strong> Tweets stored in a distributed key-value store (NoSQL, like Cassandra). Timelines are cached in-memory (like Redis).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">2. Design a URL Shortening service like bit.ly.</strong>
+                            <span class="difficulty-tag tag-system">Scale: Medium</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Core Mechanism:</strong> Generating unique 6-8 character keys for a long URL and redirecting requests.</p>
+                                <ul>
+                                    <li><strong>Key Generation:</strong> Instead of simple hashing (prone to collisions), use a **Distributed Counter Service** to generate unique numerical IDs. Convert the ID to a base62 string (0-9, a-z, A-Z) to get the short code.</li>
+                                    <li><strong>Redirection:</strong> The service takes the short code, looks up the long URL in the database, and sends an HTTP 301 or 307 redirect to the client.</li>
+                                    <li><strong>Database:</strong> Use a fast, highly available key-value store (like DynamoDB or Cassandra) for the (short\_key, long\_url) mapping. Reads greatly outweigh writes.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">3. Design Netflix (or a Video Streaming Service).</strong>
+                            <span class="difficulty-tag tag-system">Scale: Hard</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Key Challenge:</strong> Low-latency streaming and massive bandwidth requirements.</p>
+                                <ul>
+                                    <li><strong>CDN:</strong> Use a proprietary or custom Content Delivery Network (like Netflix Open Connect) distributed globally to cache video chunks close to users. 90% of requests should be handled by the CDN.</li>
+                                    <li><strong>Encoding/Transcoding:</strong> Videos must be transcoded into various bitrates, resolutions, and formats (HLS, DASH) for different devices and network conditions.</li>
+                                    <li><strong>Recommendation Service:</strong> This runs offline/asynchronously using ML models to personalize the homepage queue.</li>
+                                    <li><strong>Databases:</strong> Use NoSQL for user data and metadata (highly scalable, available).</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <h2><i class="fas fa-database" style="margin-right: 10px;"></i>Fundamental Concepts & Principles</h2>
+
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">4. Describe the CAP Theorem and its implications for distributed systems.</strong>
+                            <span class="difficulty-tag tag-system">Conceptual</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>CAP Theorem:</strong> A distributed data store can only guarantee **two** of the following three properties simultaneously:</p>
+                                <ul>
+                                    <li><strong>Consistency (C):</strong> All clients see the same data at the same time (e.g., all database replicas must agree).</li>
+                                    <li><strong>Availability (A):</strong> Every request receives a non-error response, without guarantee that the response contains the most recent write.</li>
+                                    <li><strong>Partition Tolerance (P):</strong> The system continues to operate despite arbitrary message loss or system failures (network partition).</li>
+                                </ul>
+                                <p><strong>Implication:</strong> Since P is unavoidable in a real-world distributed system, developers must choose between **C and A**. Choosing **CP** (e.g., traditional RDBMS, MongoDB) sacrifices availability during a partition. Choosing **AP** (e.g., Cassandra, DynamoDB) sacrifices immediate consistency for availability.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">5. How does Load Balancing work? Explain different algorithms (Round Robin, Least Connections, etc.).</strong>
+                            <span class="difficulty-tag tag-system">Conceptual</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Load Balancing:</strong> Distributing incoming network traffic across a group of backend servers to maximize throughput, minimize latency, and prevent any single server from becoming a single point of failure (SPOF).</p>
+                                <p><strong>Algorithms:</strong></p>
+                                <ul>
+                                    <li><strong>Round Robin:</strong> Distributes requests sequentially to each server. Simple, but ignores server capacity/load.</li>
+                                    <li><strong>Least Connections:</strong> Directs traffic to the server with the fewest active connections. Optimal for uneven loads.</li>
+                                    <li><strong>Least Response Time:</strong> Directs traffic to the server with the lowest average response time and fewest active connections.</li>
+                                    <li><strong>Hashing (IP Hash):</strong> Routes requests from the same client IP address to the same server. Important for session persistence.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question-item">
+                        <div class="question-header">
+                            <strong class="question-title">6. How do you handle database sharding? Explain different sharding keys.</strong>
+                            <span class="difficulty-tag tag-system">Conceptual</span>
+                            <span class="toggle-icon"><i class="fas fa-chevron-right"></i></span>
+                        </div>
+                        <div class="question-content">
+                            <div class="answer-section">
+                                <h3><i class="fas fa-lightbulb" style="margin-right: 5px;"></i> Answer & Explanation</h3>
+                                <p><strong>Sharding:</strong> Horizontal partitioning of a large database into smaller, independent pieces (shards) across different database server instances. This is done when vertical scaling (larger CPU/RAM) is no longer viable.</p>
+                                <p><strong>Sharding Keys:</strong> The column used to determine which shard a row belongs to (also called the partition key):</p>
+                                <ul>
+                                    <li><strong>User ID / Customer ID (Hash-Based):</strong> Hashing the ID ensures load is distributed evenly but makes range queries difficult.</li>
+                                    <li><strong>Geolocation:</strong> Sharding based on geographical regions. Good for localized services.</li>
+                                    <li><strong>Time-Based:</strong> Sharding archives data over time (e.g., all 2024 data on shard 1).</li>
+                                </ul>
+                                <p><strong>Challenge:</strong> Choosing the wrong key leads to "hotspots" or difficult cross-shard joins.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 30px; padding-bottom: 30px;">
+                    <a href="search.html?q=System+Design" class="cta-button" style="background-color: #F59E0B; border-color: #F59E0B; color: white;">Search All System Design Questions</a>
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="companies.html">Companies</a>
+                <a href="dsa-library.html">DSA</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="footer-text">
+                &copy; 2025 InternAdda Interview Hub. All rights reserved. | <strong style="font-weight: 600;">Crack your dream job with trusted interview questions.</strong>
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
